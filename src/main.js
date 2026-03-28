@@ -1,26 +1,6 @@
 // --- State & Constants ---
-const defaultRecipes = [
-  {
-    id: "seed-1",
-    name: "Tarta de Arándanos Silvestres",
-    category: "Postres & Dulces",
-    prepTime: "45",
-    image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=1470&auto=format&fit=crop",
-    ingredients: ["250g de arándanos frescos", "200g de harina integral", "100g de azúcar de coco", "2 huevos orgánicos", "Esencia de vainilla"],
-    steps: ["Precalentar el horno a 180°C.", "Mezclar los ingredientes secos en un bol grande.", "Batir los huevos con la vainilla e incorporar a la mezcla.", "Añadir los arándanos con cuidado.", "Hornear durante 35-40 minutos."]
-  },
-  {
-    id: "seed-2",
-    name: "Bowl de Quinoa y Aguacate",
-    category: "Ensaladas & Bowls",
-    prepTime: "20",
-    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1470&auto=format&fit=crop",
-    ingredients: ["1 taza de quinoa cocida", "1 aguacate maduro", "Tomates cherry", "Espinacas baby", "Aceite de oliva virgen extra", "Limón"],
-    steps: ["Lavar y preparar las verduras.", "Colocar la quinoa como base en el bowl.", "Añadir el aguacate en láminas y los tomates.", "Aliñar con limón, aceite de oliva y una pizca de sal."]
-  }
-];
-
-let recipes = JSON.parse(localStorage.getItem('gourmet_recipes')) || defaultRecipes;
+const API_URL = 'http://localhost:3001/api/recipes';
+let recipes = [];
 const categories = [
   "Postres & Dulces",
   "Platos Principales",
@@ -41,10 +21,39 @@ const modalBody = document.getElementById('modal-body');
 const closeModal = document.querySelector('.close-modal');
 
 // --- Initialization ---
-function init() {
+async function init() {
+  await fetchRecipes();
   renderCategories();
   renderRecipes();
   setupEventListeners();
+}
+
+async function fetchRecipes() {
+  try {
+    const response = await fetch(API_URL);
+    if (!response.ok) throw new Error('Network response was not ok');
+    recipes = await response.json();
+  } catch (err) {
+    console.error('Failed to fetch recipes:', err);
+    // Fallback to localStorage for safety if server is down
+    recipes = JSON.parse(localStorage.getItem('gourmet_recipes')) || [];
+  }
+}
+
+async function saveRecipesToServer() {
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(recipes)
+    });
+    if (!response.ok) throw new Error('Failed to save to server');
+    // Also update localStorage as a robust secondary backup
+    localStorage.setItem('gourmet_recipes', JSON.stringify(recipes));
+  } catch (err) {
+    console.error('Failed to save recipes:', err);
+    localStorage.setItem('gourmet_recipes', JSON.stringify(recipes));
+  }
 }
 
 // --- Rendering Functions ---
@@ -65,9 +74,10 @@ function renderRecipes(filter = 'all', searchQuery = '') {
   }
 
   if (searchQuery) {
+    const query = searchQuery.toLowerCase();
     filtered = filtered.filter(r => 
-      r.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      r.ingredients.some(i => i.toLowerCase().includes(searchQuery.toLowerCase()))
+      r.name.toLowerCase().includes(query) ||
+      r.ingredients.some(i => i.toLowerCase().includes(query))
     );
   }
 
@@ -85,10 +95,10 @@ function renderRecipes(filter = 'all', searchQuery = '') {
         </div>
         <div class="recipe-card-content">
           <h3>${recipe.name}</h3>
-          <p>${recipe.steps[0] ? recipe.steps[0].substring(0, 100) + '...' : 'Sin descripción'}</p>
+          <p>${recipe.steps && recipe.steps[0] ? recipe.steps[0].substring(0, 100) + '...' : 'Sin descripción'}</p>
           <div class="recipe-meta">
             <span>⏱️ ${recipe.prepTime || '30'} mins</span>
-            <span>🥣 ${recipe.ingredients.length} ingredientes</span>
+            <span>🥣 ${recipe.ingredients?.length || 0} ingredientes</span>
           </div>
         </div>
       </div>
@@ -100,18 +110,20 @@ function renderRecipes(filter = 'all', searchQuery = '') {
 
 function setupEventListeners() {
   // Add Recipe Button
-  addRecipeBtn.addEventListener('click', openAddRecipeForm);
+  addRecipeBtn?.addEventListener('click', openAddRecipeForm);
   document.querySelectorAll('.open-add-modal').forEach(btn => btn.addEventListener('click', openAddRecipeForm));
-  document.getElementById('scroll-to-add').addEventListener('click', openAddRecipeForm);
+  document.getElementById('scroll-to-add')?.addEventListener('click', (e) => {
+     recipeGrid.scrollIntoView({behavior: 'smooth'});
+  });
 
   // Close Modal
-  closeModal.addEventListener('click', () => recipeModal.close());
-  recipeModal.addEventListener('click', (e) => {
+  closeModal?.addEventListener('click', () => recipeModal.close());
+  recipeModal?.addEventListener('click', (e) => {
     if (e.target === recipeModal) recipeModal.close();
   });
 
   // Filters
-  categoryTabs.addEventListener('click', (e) => {
+  categoryTabs?.addEventListener('click', (e) => {
     const tab = e.target.closest('.category-tab');
     if (tab) {
       document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
@@ -121,9 +133,9 @@ function setupEventListeners() {
   });
 
   // Search
-  searchInput.addEventListener('input', (e) => {
+  searchInput?.addEventListener('input', (e) => {
     const activeTab = document.querySelector('.category-tab.active');
-    renderRecipes(activeTab.dataset.category, e.target.value);
+    renderRecipes(activeTab?.dataset.category || 'all', e.target.value);
   });
 }
 
@@ -215,7 +227,7 @@ window.addStepInput = () => {
   container.appendChild(div);
 };
 
-function handleFormSubmit() {
+async function handleFormSubmit() {
   const name = document.getElementById('recipe-name').value;
   const category = document.getElementById('recipe-category').value;
   const prepTime = document.getElementById('recipe-time').value;
@@ -236,7 +248,7 @@ function handleFormSubmit() {
   };
 
   recipes.push(newRecipe);
-  localStorage.setItem('gourmet_recipes', JSON.stringify(recipes));
+  await saveRecipesToServer();
   
   recipeModal.close();
   renderRecipes();
@@ -257,20 +269,20 @@ window.viewRecipe = (id) => {
         
         <div class="recipe-meta" style="margin-bottom: 2rem; border: none; padding: 0;">
            <span>⏱️ ${recipe.prepTime} mins</span>
-           <span>🥣 ${recipe.ingredients.length} ingredientes</span>
+           <span>🥣 ${recipe.ingredients?.length || 0} ingredientes</span>
         </div>
 
         <div class="recipe-detail-section">
           <h4>Ingredientes</h4>
           <ul style="padding-left: 1.2rem;">
-            ${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+            ${recipe.ingredients?.map(ing => `<li>${ing}</li>`).join('') || ''}
           </ul>
         </div>
 
         <div class="recipe-detail-section">
           <h4>Preparación</h4>
           <ol style="padding-left: 1.2rem;">
-            ${recipe.steps.map(step => `<li style="margin-bottom: 0.8rem;">${step}</li>`).join('')}
+            ${recipe.steps?.map(step => `<li style="margin-bottom: 0.8rem;">${step}</li>`).join('') || ''}
           </ol>
         </div>
 
@@ -283,10 +295,10 @@ window.viewRecipe = (id) => {
   recipeModal.showModal();
 };
 
-window.deleteRecipe = (id) => {
+window.deleteRecipe = async (id) => {
   if (confirm('¿Estás seguro de que quieres eliminar esta receta?')) {
     recipes = recipes.filter(r => r.id !== id);
-    localStorage.setItem('gourmet_recipes', JSON.stringify(recipes));
+    await saveRecipesToServer();
     recipeModal.close();
     renderRecipes();
   }

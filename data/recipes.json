@@ -1,0 +1,58 @@
+[
+  {
+    "id": "seed-1",
+    "name": "Tarta de Arándanos Silvestres",
+    "category": "Postres & Dulces",
+    "prepTime": "45",
+    "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=1470&auto=format&fit=crop",
+    "ingredients": [
+      "250g de arándanos frescos",
+      "200g de harina integral",
+      "100g de azúcar de coco",
+      "2 huevos orgánicos",
+      "Esencia de vainilla"
+    ],
+    "steps": [
+      "Precalentar el horno a 180°C.",
+      "Mezclar los ingredientes secos en un bol grande.",
+      "Batir los huevos con la vainilla e incrementar a la mezcla.",
+      "Añadir los arándanos con cuidado.",
+      "Hornear durante 35-40 minutos."
+    ]
+  },
+  {
+    "id": "seed-2",
+    "name": "Bowl de Quinoa y Aguacate",
+    "category": "Ensaladas & Bowls",
+    "prepTime": "20",
+    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1470&auto=format&fit=crop",
+    "ingredients": [
+      "1 taza de quinoa cocida",
+      "1 aguacate maduro",
+      "Tomates cherry",
+      "Espinacas baby",
+      "Aceite de oliva virgen extra",
+      "Limón"
+    ],
+    "steps": [
+      "Lavar y preparar las verduras.",
+      "Colocar la quinoa como base en el bowl.",
+      "Añadir el aguacate en láminas y los tomates.",
+      "Aliñar con limón, aceite de oliva y una pizca de sal."
+    ]
+  },
+  {
+    "id": "1774717899018",
+    "name": "Arroz con Leche",
+    "category": "Postres & Dulces",
+    "prepTime": "20",
+    "image": "/hero.png",
+    "ingredients": [
+      "Arroz"
+    ],
+    "steps": [
+      "Cocinar arroz con leche y az"
+    ],
+    "createdAt": "2026-03-28T17:11:39.018Z"
+  }
+]
