@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gourmet Recipes | Gestiona tus creaciones culinarias</title>
+    <meta name="description" content="Una plataforma moderna para guardar, organizar y compartir tus recetas favoritas con un diseño premium.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="container">
+        <div class="logo">
+          <span class="logo-icon">🥗</span>
+          <span class="logo-text">Gourmet<span>Recipes</span></span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Inicio</a></li>
+          <li><a href="#recipes">Recetas</a></li>
+          <li><button id="add-recipe-btn" class="btn btn-primary">Nueva Receta</button></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="home" class="hero">
+        <div class="hero-content container">
+          <div class="hero-text">
+            <span class="badge">El arte de la cocina</span>
+            <h1>Crea tu Propio Libro de Cocina Digital</h1>
+            <p>Organiza tus ingredientes, pasos e imágenes en un solo lugar con un diseño elegante y funcional.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" onclick="document.getElementById('recipes').scrollIntoView({behavior:'smooth'})">Explorar Recetas</button>
+              <button class="btn btn-outline btn-lg" id="scroll-to-add">Comenzar ahora</button>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="/hero.png" alt="Gourmet Food" id="hero-img-ref">
+            <div class="floating-card">
+              <span class="icon">✨</span>
+              <div class="info">
+                <strong>+100 Recetas</strong>
+                <span>Inspiración diaria</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category Filter -->
+      <section class="filters container">
+        <div class="filter-header">
+          <h2>Tus Colecciones</h2>
+          <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Buscar receta...">
+            <span class="search-icon">🔍</span>
+          </div>
+        </div>
+        <div class="category-tabs" id="category-tabs">
+          <button class="category-tab active" data-category="all">Todas</button>
+          <!-- Categories will be injected here -->
+        </div>
+      </section>
+
+      <!-- Recipe Grid -->
+      <section id="recipes" class="recipe-section container">
+        <div class="recipe-grid" id="recipe-grid">
+          <!-- Recipe cards will be injected here -->
+          <div class="empty-state" id="empty-state">
+             <div class="empty-icon">🍳</div>
+             <h3>Aún no tienes recetas</h3>
+             <p>¡Es el momento perfecto para añadir tu primera creación culinaria!</p>
+             <button class="btn btn-primary open-add-modal">Añadir Receta</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="container">
+        <p>&copy; 2026 Gourmet Recipes. Hecho con ❤️ para amantes de la cocina.</p>
+      </div>
+    </footer>
+
+    <!-- Modals -->
+    <dialog id="recipe-modal" class="modal">
+      <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <div id="modal-body">
+          <!-- Form or Detail View will be injected here -->
+        </div>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
