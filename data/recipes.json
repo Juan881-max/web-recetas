@@ -54,5 +54,19 @@
       "Cocinar arroz con leche y az"
     ],
     "createdAt": "2026-03-28T17:11:39.018Z"
+  },
+  {
+    "id": "1774718824661",
+    "name": "Ensalada de aguacates",
+    "category": "Ensaladas & Bowls",
+    "prepTime": "20",
+    "image": "https://d2j9trpqxd6hrn.cloudfront.net/uploads/recipe/picture/982/ensalada_de_aguacate_3.webp",
+    "ingredients": [
+      "Pureba"
+    ],
+    "steps": [
+      "Prueba"
+    ],
+    "createdAt": "2026-03-28T17:27:04.661Z"
   }
 ]
