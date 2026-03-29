@@ -1,5 +1,7 @@
 // --- State & Constants ---
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_URL = 'http://localhost:3001/api/recipes';
+const STATIC_JSON_URL = '/data/recipes.json';
 let recipes = [];
 const categories = [
   "Postres & Dulces",
@@ -30,17 +32,30 @@ async function init() {
 
 async function fetchRecipes() {
   try {
-    const response = await fetch(API_URL);
-    if (!response.ok) throw new Error('Network response was not ok');
-    recipes = await response.json();
+    if (IS_LOCAL) {
+      // En local: usar el servidor Express para poder guardar cambios
+      const response = await fetch(API_URL);
+      if (!response.ok) throw new Error('Network response was not ok');
+      recipes = await response.json();
+    } else {
+      // En producción (Vercel/móvil): leer el JSON estático directamente
+      const response = await fetch(STATIC_JSON_URL);
+      if (!response.ok) throw new Error('Failed to load recipes.json');
+      recipes = await response.json();
+    }
   } catch (err) {
     console.error('Failed to fetch recipes:', err);
-    // Fallback to localStorage for safety if server is down
+    // Último recurso: localStorage
     recipes = JSON.parse(localStorage.getItem('gourmet_recipes')) || [];
   }
 }
 
 async function saveRecipesToServer() {
+  if (!IS_LOCAL) {
+    // En producción no se puede guardar en el servidor
+    showToast('⚠️ Modo lectura: añade tus recetas desde el PC y sincroniza con GitHub.');
+    return false;
+  }
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -48,12 +63,34 @@ async function saveRecipesToServer() {
       body: JSON.stringify(recipes)
     });
     if (!response.ok) throw new Error('Failed to save to server');
-    // Also update localStorage as a robust secondary backup
     localStorage.setItem('gourmet_recipes', JSON.stringify(recipes));
+    return true;
   } catch (err) {
     console.error('Failed to save recipes:', err);
     localStorage.setItem('gourmet_recipes', JSON.stringify(recipes));
+    return false;
   }
+}
+
+function showToast(message) {
+  let toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    toast.style.cssText = `
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      background: rgba(30,30,40,0.95); color: #fff; padding: 0.9rem 1.6rem;
+      border-radius: 12px; font-size: 0.9rem; z-index: 9999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1); max-width: 90vw; text-align: center;
+      transition: opacity 0.3s;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.opacity = '1';
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(() => { toast.style.opacity = '0'; }, 4000);
 }
 
 // --- Rendering Functions ---

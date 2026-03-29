@@ -1,0 +1,80 @@
+[
+  {
+    "id": "seed-2",
+    "name": "Bowl de Quinoa y Aguacate",
+    "category": "Ensaladas & Bowls",
+    "prepTime": "20",
+    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1470&auto=format&fit=crop",
+    "ingredients": [
+      "1 taza de quinoa cocida",
+      "1 aguacate maduro",
+      "Tomates cherry",
+      "Espinacas baby",
+      "Aceite de oliva virgen extra",
+      "Limón"
+    ],
+    "steps": [
+      "Lavar y preparar las verduras.",
+      "Colocar la quinoa como base en el bowl.",
+      "Añadir el aguacate en láminas y los tomates.",
+      "Aliñar con limón, aceite de oliva y una pizca de sal."
+    ]
+  },
+  {
+    "id": "1774717899018",
+    "name": "Arroz con Leche",
+    "category": "Postres & Dulces",
+    "prepTime": "20",
+    "image": "/hero.png",
+    "ingredients": [
+      "Arroz"
+    ],
+    "steps": [
+      "Cocinar arroz con leche y az"
+    ],
+    "createdAt": "2026-03-28T17:11:39.018Z"
+  },
+  {
+    "id": "1774778636711",
+    "name": "Ensalada de Aguacates",
+    "category": "Ensaladas & Bowls",
+    "prepTime": "20",
+    "image": "https://d2j9trpqxd6hrn.cloudfront.net/uploads/recipe/picture/982/ensalada_de_aguacate_3.webp",
+    "ingredients": [
+      "1 tomate",
+      "1 aguacate",
+      "Media cebolla",
+      "1 lata de atun natural",
+      "Cilantro, sal, aceite, limon, vinagre y pimienta negra recien molida",
+      "1 pepino"
+    ],
+    "steps": [
+      "1. Cortamos el tomate, el aguacate en cuadraditos",
+      "2. Cortamos la cebolla en juliana",
+      "3. Quitamos las semillas al pepino y cortamos en daditos",
+      "En un pequeño recipiente mezclamos bien el cilantro, sal, aceite, limon, vinagre y pimienta negra recien molida",
+      "En un bol con todos los ingredientes, vertemos el aliño por encima, mezclamos y listo."
+    ],
+    "createdAt": "2026-03-29T10:03:56.711Z"
+  },
+  {
+    "id": "1774779506589",
+    "name": "Col gratinada al horno",
+    "category": "Platos Principales",
+    "prepTime": "40",
+    "image": "https://i.ytimg.com/vi/JC4oSAetzvE/sddefault.jpg",
+    "ingredients": [
+      "4 lonchas de coliflor del tamaño de 2 cm",
+      "Tomate natural",
+      "Mozzarella rallada",
+      "Sal, aceite, pimenton, pimienta recine molida, oregano, cebolla picadita fina"
+    ],
+    "steps": [
+      "1. Cortar las rodajas de coliflor y poner en una bandeja de horno poniendo papel de hornear debajo",
+      "2. Mezclamos sal, aceite, pimenton, pimienta recine molida, cebolla picadita fina, ajo en polvo y con un pincel le damos a la coliflor por ambos lados",
+      "3. Ponemos en el horno a 220 grados y aproximadamente a los 35 minutos sacamos (dependiendo de el grosor). Pinchar con un tenedor para comprobar si esta tierna.",
+      "4.  Ponemos el tomate natural y la mozzarella por arriba, espolvoreamos con oregano por encima y gratinamos a 220 grados durante 5 minutos. Y listo."
+    ],
+    "createdAt": "2026-03-29T10:18:26.589Z"
+  }
+]

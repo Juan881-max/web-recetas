@@ -10,6 +10,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = 3001;
 const DATA_PATH = path.join(__dirname, 'data', 'recipes.json');
+const PUBLIC_DATA_PATH = path.join(__dirname, 'public', 'data', 'recipes.json');
 
 app.use(cors());
 app.use(express.json());
@@ -28,7 +29,12 @@ app.get('/api/recipes', async (req, res) => {
 app.post('/api/recipes', async (req, res) => {
   try {
     const recipes = req.body;
-    await fs.writeFile(DATA_PATH, JSON.stringify(recipes, null, 2));
+    const json = JSON.stringify(recipes, null, 2);
+    // Guardar en ambas rutas: backup local + archivo estático de producción
+    await Promise.all([
+      fs.writeFile(DATA_PATH, json),
+      fs.writeFile(PUBLIC_DATA_PATH, json)
+    ]);
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: 'Failed to save recipes' });
