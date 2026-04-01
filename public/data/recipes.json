@@ -1,40 +1,5 @@
 [
   {
-    "id": "seed-2",
-    "name": "Bowl de Quinoa y Aguacate",
-    "category": "Ensaladas & Bowls",
-    "prepTime": "20",
-    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1470&auto=format&fit=crop",
-    "ingredients": [
-      "1 taza de quinoa cocida",
-      "1 aguacate maduro",
-      "Tomates cherry",
-      "Espinacas baby",
-      "Aceite de oliva virgen extra",
-      "Limón"
-    ],
-    "steps": [
-      "Lavar y preparar las verduras.",
-      "Colocar la quinoa como base en el bowl.",
-      "Añadir el aguacate en láminas y los tomates.",
-      "Aliñar con limón, aceite de oliva y una pizca de sal."
-    ]
-  },
-  {
-    "id": "1774717899018",
-    "name": "Arroz con Leche",
-    "category": "Postres & Dulces",
-    "prepTime": "20",
-    "image": "/hero.png",
-    "ingredients": [
-      "Arroz"
-    ],
-    "steps": [
-      "Cocinar arroz con leche y az"
-    ],
-    "createdAt": "2026-03-28T17:11:39.018Z"
-  },
-  {
     "id": "1774778636711",
     "name": "Ensalada de Aguacates",
     "category": "Ensaladas & Bowls",
@@ -76,5 +41,75 @@
       "4.  Ponemos el tomate natural y la mozzarella por arriba, espolvoreamos con oregano por encima y gratinamos a 220 grados durante 5 minutos. Y listo."
     ],
     "createdAt": "2026-03-29T10:18:26.589Z"
+  },
+  {
+    "id": "1775060227578",
+    "name": "Tortilla wrap de aguacate",
+    "category": "Platos Principales",
+    "prepTime": "20",
+    "image": "https://stcamaleonmediapro.blob.core.windows.net/web/2023/02/05_GOFIT_WRAP.jpg",
+    "ingredients": [
+      "3 huevos",
+      "1 tortilla de maiz",
+      "1/2 aguacate",
+      "1/2 media taza de queso mozarella",
+      "1 tomate",
+      "1/4 de cebolla",
+      "sal y pimienta al gusto"
+    ],
+    "steps": [
+      "Cortamos y troceamos la media cebolla y el tomate, lo ponemos en una sarten a fuego bajo y echando algo de sal y pimienta lo sofreimos durante unos minutos, hasta que la cebolla este tierna",
+      "Batimos los 3 huevos y los echamos en la sarten junto a la cebolla y el tomate, cubrimos bien todo con el huevo. Colocamos encima la tortilla de maiz, tapamos y dejamos cocinar sobre 10 minutos a fuego muy bajito.",
+      "Cuando haya pasado el tiempo, le damos la vuelta con cuidado de que no se rompa. Encima echamos el queso mozarella, lechuga y el medio aguacate cortadito en juliana.",
+      "La envolvemos como una tortilla y seguimos cocinandola unos minutos hasta que este bien doradita. Y listo.",
+      "(Opcional, podemos echar otros ingredientes al gusto, tambien si nos gusta el picante podemos echar algo en el sofrito.)"
+    ],
+    "createdAt": "2026-04-01T16:17:07.578Z"
+  },
+  {
+    "id": "1775061215557",
+    "name": "Espaguetis con Gambas al Ajillo",
+    "category": "Platos Principales",
+    "prepTime": "30",
+    "image": "https://www.javirecetas.com/wp-content/uploads/2014/10/espaguetis-con-gambas-al-ajillo.jpg",
+    "ingredients": [
+      "250 gr de gambas o langostinos (Pueden ser frescas o congeladas)",
+      "3 dientes de ajo",
+      "200 gr de pasta (100 gramos por persona)",
+      "aceite de oliva, sal al gusto, agua",
+      "1 cayena, perejil"
+    ],
+    "steps": [
+      "Limpiamos las gambas y troceamos los 3 ajos en laminas",
+      "Cocemos la pasta con sal, durante el tiempo que ponga en el paquete.\nReservamos un par de cazos del agua de la coccion pra despues.",
+      "En una sarten con aceite de oliva a fuego lento, echamos los ajos y los movemos hasta que esten ligeramente dorados. Cuando esten doraditos echamos las gambas, sal y la cayena, cuando este todo hecho (ojo no se quemen los ajos) se añade la pasta escurrida y un poco del agua de la coccion que reservamos anteriormente.",
+      "Mezclamos todo muy bien parea que la pasta se integre con los ingredientes, lo dejamos unos 2 minutos para que se termine de cocinar. Moviendolo de vez en cuando.",
+      "Para adornar echamos un poquito de perejil y ya esta listo !"
+    ],
+    "createdAt": "2026-04-01T16:33:35.557Z"
+  },
+  {
+    "id": "1775061588284",
+    "name": "Tortilla wrap de jamon york, tomate y queso",
+    "category": "Platos Principales",
+    "prepTime": "20",
+    "image": "https://1.bp.blogspot.com/-mxwGl4j1qZU/WgmxyQ51HcI/AAAAAAAAs5M/Yw4ZcuB3Zq8Q6ANaOY4U1tIPMrmgZRLpACEwYBhgL/s900/wrap-s%25C3%25A1ndwich-jamon-queso%2B1.jpg",
+    "ingredients": [
+      "Tortilla de trigo (o de maiz): 1 unidades    ",
+      "Huevos: 2 unid. ",
+      "Jamón york: 1 loncha grande",
+      "Queso (variedad al gusto): 2 lonchas",
+      "Tomate rojo: 2 rodajas",
+      "Sal: cantidad al gusto ",
+      "Aceite de oliva: 1 cuch. y media sopera"
+    ],
+    "steps": [
+      "Pon el aceite a calentar. Bate los huevos con 1 poco de sal y échalos a la sartén.",
+      "Pon encima la tortilla de trigo y espera unos 20 segundos.",
+      "Dale la vuelta, de modo que la tortilla de trigo quede abajo y el huevo, arriba.",
+      "Rellénala, colocando en la mitad de la superficie, el jamón york, el queso y el tomate.",
+      "Dobla la tortilla hacia la parte que está el relleno. Tuesta un minuto por cada lado para que se funda el queso y la tortilla de trigo quede crujiente y calentita."
+    ],
+    "createdAt": "2026-04-01T16:39:48.284Z"
   }
 ]
