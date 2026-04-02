@@ -224,8 +224,14 @@ function openAddRecipeForm() {
       </div>
 
       <div class="form-group">
-        <label for="recipe-image">URL de Imagen (opcional)</label>
-        <input type="url" id="recipe-image" placeholder="https://ejemplo.com/imagen.jpg">
+        <label for="recipe-image">Imagen de la Receta (opcional)</label>
+        <input type="file" id="recipe-image" accept="image/*" onchange="previewImage(this)">
+        <div id="image-preview" style="margin-top: 0.5rem;"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="recipe-youtube">Enlace de YouTube (opcional)</label>
+        <input type="url" id="recipe-youtube" placeholder="https://www.youtube.com/watch?v=...">
       </div>
 
       <div style="text-align: right; margin-top: 2rem;">
@@ -264,12 +270,30 @@ window.addStepInput = () => {
   container.appendChild(div);
 };
 
+let currentImageBase64 = '';
+
+window.previewImage = (input) => {
+  const preview = document.getElementById('image-preview');
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      currentImageBase64 = e.target.result;
+      preview.innerHTML = `<img src="${e.target.result}" style="max-width: 200px; max-height: 150px; border-radius: 8px; object-fit: cover;">`;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    currentImageBase64 = '';
+    preview.innerHTML = '';
+  }
+};
+
 async function handleFormSubmit() {
   const name = document.getElementById('recipe-name').value;
   const category = document.getElementById('recipe-category').value;
   const prepTime = document.getElementById('recipe-time').value;
-  const image = document.getElementById('recipe-image').value || '/hero.png';
-  
+  const image = currentImageBase64 || '/hero.png';
+  const youtube = document.getElementById('recipe-youtube').value || '';
+
   const ingredients = Array.from(document.querySelectorAll('.ingredient-input')).map(input => input.value);
   const steps = Array.from(document.querySelectorAll('.step-input')).map(input => input.value);
 
@@ -279,6 +303,7 @@ async function handleFormSubmit() {
     category,
     prepTime,
     image,
+    youtube,
     ingredients,
     steps,
     createdAt: new Date().toISOString()
@@ -286,7 +311,8 @@ async function handleFormSubmit() {
 
   recipes.push(newRecipe);
   await saveRecipesToServer();
-  
+
+  currentImageBase64 = '';
   recipeModal.close();
   renderRecipes();
 }
@@ -322,6 +348,14 @@ window.viewRecipe = (id) => {
             ${recipe.steps?.map(step => `<li style="margin-bottom: 0.8rem;">${step}</li>`).join('') || ''}
           </ol>
         </div>
+
+        ${recipe.youtube ? `
+        <div style="margin-top: 1.5rem;">
+          <a href="${recipe.youtube}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <span>▶</span> Ver en YouTube
+          </a>
+        </div>
+        ` : ''}
 
         <div style="text-align: right; margin-top: 2rem;">
           <button class="btn btn-outline btn-remove-full" onclick="deleteRecipe('${recipe.id}')" style="background: rgba(231, 76, 60, 0.1); border-color: #e74c3c; color: #e74c3c;">Eliminar Receta</button>
